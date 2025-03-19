@@ -32,22 +32,6 @@ class Softmax(Activation):
         exps = np.exp(x - np.max(x, axis=-1, keepdims=True))
         return exps / np.sum(exps, axis=-1, keepdims=True)
     def derivative(self, x, target=None, actions=None, rewards=None):
-        """
-        Compute the derivative of softmax.
-        
-        - If `target` is provided, assumes cross-entropy gradient (classification).
-        - If `actions` and `rewards` are provided, assumes policy gradient (REINFORCE).
-        - Otherwise, returns the full Jacobian (less common, expensive).
-        
-        Parameters:
-            x: Input logits (batch_size, num_classes)
-            target: One-hot encoded target (batch_size, num_classes) [Cross-Entropy]
-            actions: Indices of selected actions (batch_size,) [Policy Gradient]
-            rewards: Reward signal (batch_size,) [Policy Gradient]
-        
-        Returns:
-            Gradient tensor of same shape as `x`
-        """
         softmax_out = self.__call__(x)  # Compute softmax
         
         if target is not None:

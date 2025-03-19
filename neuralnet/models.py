@@ -13,6 +13,7 @@ class MLP:
         outputs = [layer.forward(inputs) for layer in self.layers[-self.output_heads:]]
         return outputs if len(outputs) > 1 else outputs[0]  # Return single output if only 1 head
 
+    # backward pass compatible with multiple output layers
     def backward(self, grads):
         # If multiple output layers, expect multiple gradients
         if not isinstance(grads, list):

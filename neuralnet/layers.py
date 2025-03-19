@@ -11,14 +11,12 @@ class Layer:
         self.a = None
 
     def forward(self, inputs):
-        """Compute the forward pass"""
         self.inputs = inputs
         self.z = np.dot(inputs, self.weights.get()) + self.bias.get()
         self.a = self.activation(self.z) if self.activation is not None else self.z
         return self.a  # Only return post-activation output
 
     def backward(self, grad):
-        """Compute the backward pass"""
         if self.inputs is None:
             raise ValueError("No input data. Call forward first.")
         # Apply activation function derivative if there is an activation
