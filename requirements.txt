@@ -1,0 +1,7 @@
+numpy
+scipy
+matplotlib
+gymnasium
+gymnasium[other]
+gymnasium[classic-control]
+gymnasium[mujoco]
